@@ -3,6 +3,10 @@ from django.utils import timezone
 import datetime
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import BaseAuthentication
+class Tag(models.Model):
+    name = models.CharField(max_length=10)
+    def __str__(self):
+        return self.name
 # Create your models here.
 class ToDo(models.Model):
     permission_classes=[IsAuthenticated]
@@ -21,6 +25,6 @@ class ToDo(models.Model):
     due_date=models.DateField()
     created_on=models.TimeField(auto_now_add=True,null=False,blank=False)
     status=models.CharField(max_length=10,choices=STATUS_CHOICES,default='OPEN')
-    tag=models.CharField(max_length=10,blank=False,null=True)
+    tags= models.ManyToManyField(Tag, blank=True)
     def __str__(self) -> str:
-        return self.Title
+        return self.tags

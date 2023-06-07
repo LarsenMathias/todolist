@@ -5,5 +5,6 @@ urlpatterns=[
     path('', ListTodo.as_view()),
     path('create',CreateTodo.as_view()),
     path('delete/<int:pk>/',DeleteTodo.as_view()),
-   path('todo/tag/<str:tag>/', tagTodo.as_view(), name='tagTodo'),
+
+    path('todo/tags/<str:tag_name>/', TodoListByTagAPIView.as_view(), name='todo-list-by-tag'),
 ]

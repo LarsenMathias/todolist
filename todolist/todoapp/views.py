@@ -17,9 +17,9 @@ class CreateTodo(generics.CreateAPIView):  #create to do list
 class DeleteTodo(generics.DestroyAPIView):   #Delete to do list
     queryset=ToDo.objects.all()
     serializer_class=ToDoSerializer
-class tagTodo(generics.ListAPIView):
-    queryset=ToDo.objects.all()
-    serializer_class=ToDoSerializer
+
+class TodoListByTagAPIView(generics.ListAPIView):
+    serializer_class = ToDoSerializer
     def get_queryset(self):
-        tag = self.kwargs['tag']
-        return ToDo.objects.filter(tag=tag)
+        tag_name = self.kwargs['tag_name']
+        return ToDo.objects.filter(tags__name=tag_name)
